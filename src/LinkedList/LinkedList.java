@@ -1,18 +1,18 @@
 package LinkedList;
 
+class Node{
+    int value;
+    Node next;
+    public Node(int value){
+        this.value = value;
+    }
+}
 
 public class LinkedList {
     private Node head;
     private Node tail;
     private int length;
 
-    static class Node{
-        int value;
-        Node next;
-        public Node(int value){
-            this.value = value;
-        }
-    }
 
     public LinkedList(int value){
         Node newNode = new Node(value);
@@ -70,6 +70,57 @@ public class LinkedList {
             tail = null;
         }
         return  temp;
+    }
+
+    public void prepend(int value){
+        Node newNode = new Node(value);
+        if(length==0||head==null){
+            head = newNode;
+            tail = newNode;
+        }
+        else{
+            newNode.next = head;
+            head = newNode;
+        }
+        length++;
+    }
+
+    public Node removeFirst(){
+        if(length==0||head==null){
+            return null;
+        }
+        Node temp = head;
+        head = head.next;
+        temp.next = null;
+        length--;
+        if(length==0||head.next==null){
+            head = null;
+            tail =null;
+        }
+        return temp;
+    }
+
+    public Node get(int index){
+        if (index<0||index>=length){
+            return null;
+        }
+        Node temp = head;
+        for (int i = 0; i < index; i++) {
+            temp = temp.next;
+        }
+        return temp;
+
+    }
+
+    public boolean set(int index,int value){
+        Node temp = get(index);
+        if(temp != null){
+            temp.value = value;
+            return true;
+        }
+        return false;
+        
+
     }
 
 
